@@ -3,7 +3,7 @@ const path = require('path');
 
 const app = express();  
 
-const routes = require('./routes');
+const routes = require('./server/routes');
 const build = path.join(__dirname, './build');
 
 // Settings

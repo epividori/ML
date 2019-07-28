@@ -24,6 +24,11 @@ class ItemList extends Component {
     }
 
     componentDidUpdate(prevProps) {
+        if(location.search != prevProps.location.search){
+            console.log(prevProps);
+            const query = queryString.parse(location.search);
+            this.searchItems(query.search);       
+        }
     }
 
     searchItems(query) {

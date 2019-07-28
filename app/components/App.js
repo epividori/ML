@@ -48,9 +48,6 @@ class App extends Component {
         return (
           <div className="App">
             <SearchBar onSubmit={this.handleSubmit} />
-            <Switch>
-              <Route path="/items" component={Items} />
-            </Switch>
           </div>
         )
     }
