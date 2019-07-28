@@ -1,0 +1,16 @@
+.Breadcrumb {
+    background-color: #EEEEEE;
+    padding-top:16px;
+    padding-bottom:16px;
+}
+
+.Breadcrumb > ul {
+    margin: 0px !important;
+    padding-left: 0px !important;
+}
+.breadcrumb-li {
+    list-style-type: none;
+    color:#666666;
+    font-size:14px;
+    display:inline-block
+}
