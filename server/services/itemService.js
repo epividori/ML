@@ -15,6 +15,7 @@ function getItem(id)
 
     return axios(request)
         .then(response => {
+
             const data = response.data;
 
             var url_picture = '';
@@ -29,7 +30,7 @@ function getItem(id)
             const decimals = price_array[1] ? price_array[1] : '00';
 
 
-            var item = {
+            var response = {
                 author: {
                     name: 'Evelyn',
                     lastname: 'Pividori'
@@ -49,13 +50,16 @@ function getItem(id)
                     description: ''
                 }
             }
-            // Busco la descripción
-               return getItemDescription(id)
-                .then(data => {
-                    item.description = data;
-                    return item;
-                }
-            )
+
+            return response;
+        })
+        .then(response => {
+
+            return getItemDescription(response.item.id)
+                    .then(result => {
+                        response.item.description = result;
+                        return response;
+                    })
         })
         .catch(err =>{
             console.log(err);
@@ -73,7 +77,7 @@ function getItemDescription(id) {
     };
 
     return axios(request)
-        .then(response => response.plain_tex )
+        .then(response => response.data.plain_text)
         .catch(err =>{
             console.log(err);
         })
@@ -83,47 +87,39 @@ function getItemDescription(id) {
  * Obtiene los items según una query de busqueda
  * @param {*} query 
  */
-function getItemsByQuery(query) {
+function getItems(query) {
+
     var request = {
-        url: `${_BASEURL}/sites/MLA/search?q=+${query}`,
+        url: `${_BASEURL}/sites/MLA/search?q=${query}`,
         method: 'GET'
     };
 
     return axios(request)
     .then(response => {
+
         const data = response.data;
 
         var list_categories = [];
-
         if(data.filters) {
             
             // Se busca el filtro relacionados a la Categoria
             const filter = data.filters.find(filter => filter.id == "category" );
 
             if(filter) {
-                list_categories = filter.values.map(cat => cat.name);
+                list_categories = filter.values[0].path_from_root.map((cat) => cat.name);
             }
         }
-       
+
+        var items = [];
         if (data.results) {
 
-
             // Obtengo los primeros 4 resultados
-            var items = data.results.slice(0,4);
-        
-            var url_picture = '';
-            if(data.pictures) {
-                url_picture = data.pictures.length ? data.pictures[0].secure_url : '';
-            }
+            items = data.results.slice(0,4);
 
-            const free_shipping = data.shipping ? data.shipping.free_shipping : false;
+            items = items.map(item => {
 
-            const categories = [];
-
-            items = data.results.map(item => {
-
+                // Separador del precio
                 var price_array = item.price.toString().split('.');
-
                 const price = price_array[0];
                 const decimals = price_array[1] ? price_array[1] : '00';
 
@@ -135,23 +131,24 @@ function getItemsByQuery(query) {
                         amount: price,
                         decimals: decimals
                     },
-                    picture: url_picture,
-                    condition: data.condition,
-                    free_shipping: free_shipping,
+                    picture: item.thumbnail ? item.thumbnail : '',
+                    condition: item.condition,
+                    free_shipping: item.shipping ? item.shipping.free_shipping : false,
+                    address: item.address ? item.address.state_name : ''
                 }
             });
-
-            const result = {
-                author: {
-                    name: "Evelyn",
-                    lastname: "Pividori"
-               },
-               categorias: list_categories,
-               items: items
-            }
-
-            return result;
         }    
+
+        const result = {
+            author: {
+                name: "Evelyn",
+                lastname: "Pividori"
+           },
+           categories: list_categories,
+           items: items
+        }
+
+        return result;
     })
     .catch(err =>{
         console.log(err);
@@ -160,4 +157,4 @@ function getItemsByQuery(query) {
 
 module.exports.getItem = getItem;
 module.exports.getItemDescription = getItemDescription;
-module.exports.getItemsByQuery = getItemsByQuery;
+module.exports.getItems = getItems;

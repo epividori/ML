@@ -5,7 +5,7 @@ const itemController = require('./app/controllers/itemController');
 
 router.get('/items/:id', itemController.getItemById);
 
-router.get('/items', itemController.getItemsByQuery);
+router.get('/items', itemController.getItems);
 
 // Otras rutas
 router.get('*', (req, res) => {
