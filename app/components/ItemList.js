@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
-import Breadcrumb from './Breadcrumb';
+import Breadcrumb from './commons/Breadcrumb';
 import queryString from 'query-string';
 import numeral from 'numeral';
 import { getItems } from '../../server/services/itemService';
@@ -13,8 +12,7 @@ class ItemList extends Component {
 
         this.state = {
             items : [],
-            categories: [],
-            hasresults: false
+            categories: []
         }
     }
 
@@ -24,7 +22,7 @@ class ItemList extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(location.search != prevProps.location.search){
+        if(this.props.location.search != prevProps.location.search){
             console.log(prevProps);
             const query = queryString.parse(location.search);
             this.searchItems(query.search);       
@@ -42,7 +40,7 @@ class ItemList extends Component {
     }
 
     render() {
-        const {items, categories, hasresults} = this.state;
+        const {items, categories} = this.state;
 
         return (
             <div className="row">
@@ -58,12 +56,15 @@ class ItemList extends Component {
                                         id={item.id}
                                         title={item.title}
                                         price={price} 
+                                        amount={item.price.amount}
+                                        decimals={item.price.decimals}
                                         picture={item.picture}
                                         condition={item.condition}
                                         free_shipping={item.free_shipping}
                                         sold_quantity={item.sold_quantity}
                                         description={item.description}
                                         address={item.address}
+                                        categories={categories}
                                 />;
                         })
                 }

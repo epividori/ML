@@ -1,6 +1,7 @@
 .Items {
     background-color: white;    
     border-radius: 4px;
+    padding: 32px;
 }
 
 .Item {
@@ -14,13 +15,27 @@
     border-radius: 4px;
 }
 
+.item-big-picture {
+    width: 680px; 
+}
+
 .price {
     font-size: 24px;
     margin-bottom: 32px; 
 }
 
+.item-price {
+    font-size: 46px;
+    margin-bottom: 32px;
+}
+
 .title {
     font-size: 18px;
+}
+
+.item-title {
+    font-size: 24px;
+    margin-bottom: 32px;
 }
 
 .address {
@@ -35,4 +50,32 @@
 
 .shipping > img {
     zoom: 0.5;
+}
+
+.item-basic-info {
+    padding-right: 32px;
+    padding-top: 32px;
+}
+
+.item-condition {
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.btn-primary {
+    background-color: #3483FA !important; 
+}
+
+.item-description {
+    padding: 32px;
+}
+
+.item-description > .h2 {
+    font-size: 28px;
+}
+
+.item-description > .text{
+    font-size: 16px;
+    color: #999999;
+    white-space: pre-wrap;
 }

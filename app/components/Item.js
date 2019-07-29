@@ -1,24 +1,51 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 
-import Styles from './styles/item_style.css';
+import Number from './commons/Number';
 
 const shipping_img = require('../assets/img/ic_shipping.png');
 
 class Item extends Component {
     constructor(props) {
         super(props);
+
+        this.state= {
+            redirectToItemDetail: false
+        };
+
+        this.onSelectItem = this.onSelectItem.bind(this);
+    }
+
+    onSelectItem () {
+        this.setState({
+            redirectToItemDetail: true
+        })
     }
 
     render() {
+        const { redirectToItemDetail } = this.state;
+
+        if(redirectToItemDetail) {
+            return (
+                <div>
+                    <Redirect push to={{ pathname: `/items/${this.props.id}`, state: {categories: this.props.categories} }} />
+                </div>
+            )
+        }
         return (
             <div className="Item">
                 <div className="row">
                     <div className="col-sm-auto">
-                        <img className="img-fluid item-picture" src={this.props.picture}/>
+                        <a onClick={this.onSelectItem}>
+                            <img className="img-fluid item-picture" src={this.props.picture}/>
+                        </a>
                     </div>
                     <div className="col-sm">
                         <div className="price"> 
-                            <span className="amount"> {this.props.price} </span>
+                            <span className="amount"> 
+                            {/* {this.props.price}  */}
+                                <Number price={`${this.props.amount}.${this.props.decimals}`} />
+                            </span>
                             {
                                 this.props.free_shipping ? 
                                 <span>

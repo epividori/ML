@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 
 import SearchBar from './SearchBar';
 import Items from './ItemsSection';
+import ItemDetail from './ItemDetail';
+
 
 import { getItems } from '../../server/services/itemService';
 import Styles from './styles/styles.css';
@@ -39,8 +41,8 @@ class App extends Component {
         if(redirectToItems) {
           return (
             <div>
-              <App/>
-              <Redirect push to={{ pathname: '/items', search: `search=${search}` }} />
+                <App/>
+                <Redirect push to={{ pathname: '/items', search: `search=${search}` }} />
             </div>
           )
         }
@@ -48,6 +50,9 @@ class App extends Component {
         return (
           <div className="App">
             <SearchBar onSubmit={this.handleSubmit} />
+              <Switch>
+                  <Route path='/items' component={Items} />
+              </Switch>
           </div>
         )
     }

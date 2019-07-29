@@ -60,10 +60,9 @@ function getItem(id)
                         response.item.description = result;
                         return response;
                     })
+                    .catch(err => err)
         })
-        .catch(err =>{
-            console.log(err);
-        })
+        .catch(err => err)
 }
 
 /**
@@ -78,9 +77,7 @@ function getItemDescription(id) {
 
     return axios(request)
         .then(response => response.data.plain_text)
-        .catch(err =>{
-            console.log(err);
-        })
+        .catch(err => err)
 }
 
 /**
@@ -150,9 +147,7 @@ function getItems(query) {
 
         return result;
     })
-    .catch(err =>{
-        console.log(err);
-    })
+    .catch(err => err)
 }
 
 module.exports.getItem = getItem;

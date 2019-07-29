@@ -1,5 +1,6 @@
 const path = require('path');
 const service = require(path.join(__dirname, '..', '../server/services/itemService.js'));
+const error = require(path.join(__dirname, '..', '../server/error.js'));
 
 itemController = {};
 
@@ -12,7 +13,7 @@ itemController.getItemById = (req, res) => {
             res.send(data);
         })
         .catch(err =>
-            console.log(err)
+            res.send(error)
         )
     }
 }
@@ -28,7 +29,7 @@ itemController.getItems = (req, res) => {
             res.send(data)
         })
         .catch(err =>
-            console.log(err)
+            res.send(error)
         )
     }
 }

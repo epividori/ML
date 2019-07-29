@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { FaAngleRight  } from 'react-icons/fa';
-import Style from './styles/breadcrumb_style.css';
+import Style from '../styles/breadcrumb_style.css';
 
 class Breadcrumb extends Component {
     constructor(props) {
