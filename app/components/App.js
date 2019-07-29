@@ -3,12 +3,11 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 
+import Home from './Home';
 import SearchBar from './SearchBar';
 import Items from './ItemsSection';
-import ItemDetail from './ItemDetail';
 
 
-import { getItems } from '../../server/services/itemService';
 import Styles from './styles/styles.css';
 
 class App extends Component {
@@ -51,6 +50,7 @@ class App extends Component {
           <div className="App">
             <SearchBar onSubmit={this.handleSubmit} />
               <Switch>
+                  <Route exact path='/' component={Home} />
                   <Route path='/items' component={Items} />
               </Switch>
           </div>

@@ -16,7 +16,7 @@ class ItemsSection extends Component {
                 <div className='row justify-content-center'>
                     <div className='col-md-10'>
                         <Switch>
-                            <Route exact path='/items/:id' component={ItemDetail}/>
+                            <Route path='/items/:id' component={ItemDetail}/>
                             <Route exact path='/items' component={ItemList}/>
                         </Switch>
                     </div>

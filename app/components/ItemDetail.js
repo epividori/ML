@@ -25,7 +25,6 @@ class ItemDetail extends Component {
         .then(result => this.setState({
             item: result.item
         }))
-        .catch(err => console.log(err))
     }
 
     render() {
