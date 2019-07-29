@@ -11,3 +11,9 @@ La aplicación consta de tres componentes principales: Caja de búsqueda, visual
 - Servidor:
     - Node v12.6.0 
     - Express ^4.17.1
+
+###### Ejecutar
+
+npm install
+npm start
+

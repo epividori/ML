@@ -4,8 +4,10 @@
   "description": "Test Práctico Front End ML",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "webpack": "webpack --mode development --watch"
+    "start": "npm run init",
+    "init": "webpack -p && node server.js",
+    "webpack-dev": "webpack --mode development --watch",
+    "webpack-prod": "webpack --mode production"
   },
   "author": "Evelyn Pividori",
   "license": "ISC",
